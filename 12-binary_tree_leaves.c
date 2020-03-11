@@ -22,3 +22,19 @@ size_t binary_tree_leaves(const binary_tree_t *tree)
 	else
 		return (size);
 }
+
+/**
+ * binary_tree_is_leaf - checks if a node is a leaf
+ * @node: is a pointer to a node to be checked
+ * Return: 1 if node is leaf and otherwise 0
+*/
+
+int binary_tree_is_leaf(const binary_tree_t *node)
+{
+	if (node == NULL)
+		return (0);
+	if (node->left == NULL && node->right == NULL)
+		return (1);
+	else
+		return (0);
+}
