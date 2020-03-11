@@ -8,14 +8,16 @@
 
 int binary_tree_is_perfect(const binary_tree_t *tree)
 {
-	int count_perfect = 0, balance = 0;
+	int count_perfect = 0, balance = 0, count_left = 0, count_right = 0;
 
 	if (tree == NULL)
 		return (0);
 
 	count_perfect = tree_count_perfect(tree);
 	balance = binary_tree_balance(tree);
-	if (count_perfect == 0 && balance == 0)
+	count_left = binary_tree_size(tree->left);
+	count_right = binary_tree_size(tree->right);
+	if (count_perfect == 0 && balance == 0 && count_left == count_right)
 		return (1);
 	else
 		return (0);
