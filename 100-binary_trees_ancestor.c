@@ -7,55 +7,47 @@
  * Return: a pointer to the uncle node
 */
 
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first, const binary_tree_t *second)
+binary_tree_t *binary_trees_ancestor(const
+		binary_tree_t *first, const binary_tree_t *second)
 {
-	size_t first_depth, second_depth;
-	binary_tree_t *first_copy, *second_copy;
-
-
+	size_t fst_depth, snd_depth;
+	binary_tree_t *fc = (binary_tree_t *)first, *sc = (binary_tree_t *)second;
 
 	if (first == NULL || second == NULL)
 		return (NULL);
-	first_copy = (const binary_tree_t) first;
-	second_copy = (const binary_tree_t) second;
-	first_depth = binary_tree_depth(first);
-	second_depth = binary_tree_depth(second);
-	if (first_depth > second_depth)
+	fst_depth =  binary_tree_depth(first), snd_depth = binary_tree_depth(second);
+	if (fst_depth > snd_depth)
 	{
-		while (first_depth > second_depth)
+		while (fst_depth > snd_depth)
 		{
-			first_copy = first_copy->parent;
-			first_depth = first_depth - 1;
-
+			fc = fc->parent;
+			fst_depth = fst_depth - 1;
 		}
 	}
-	else if (first_depth < second_depth)
+	else if (fst_depth < snd_depth)
 	{
-		while (first_depth < second_depth)
+		while (fst_depth < snd_depth)
 		{
-			second_copy = second_copy->parent;
-			second_depth = second_depth -1;
+			sc = sc->parent;
+			snd_depth = snd_depth - 1;
 		}
 	}
-	if (first_depth == second_depth)
+	if (fst_depth == snd_depth)
 	{
-		if (first_copy == second_copy)
-			return (first_copy);
-		if (first == second_copy)
-			return (second_copy);
-		else if (second == first_copy)
-			return (first_copy);
-		else
+		if (fc == sc)
+			return (fc);
+		if (first == sc)
+			return (sc);
+		else if (second == fc)
+			return (fc);
+		while (fc != sc)
 		{
-			while (first_copy != second_copy)
-			{
-				if (first_copy == NULL || second_copy == NULL)
-					return (NULL);
-				first_copy = first_copy->parent;
-				second_copy = second_copy->parent;
-			}
-			return (first_copy);
+			if (fc == NULL || sc == NULL)
+				return (NULL);
+			fc = fc->parent;
+			sc = sc->parent;
 		}
+			return (fc);
 	}
 	return (NULL);
 }
