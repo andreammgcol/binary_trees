@@ -9,14 +9,14 @@
 int binary_tree_is_complete(const binary_tree_t *tree)
 {
 	int count_left = 0, count_right = 0;
-    int l_height = 0, r_height = 0;
+	int l_height = 0, r_height = 0;
 
 	if (tree == NULL)
 		return (0);
 
-    l_height = binary_tree_height(tree->left);
-    r_height = binary_tree_height(tree->right);
-    count_left = binary_tree_size(tree->left);
+	l_height = binary_tree_height(tree->left);
+	r_height = binary_tree_height(tree->right);
+	count_left = binary_tree_size(tree->left);
 	count_right = binary_tree_size(tree->right);
 	if ((count_left >= count_right) || (l_height >= r_height))
 		return (1);
